@@ -1,21 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Container, Header, Text } from "native-base";
+
+const UserContext = React.createContext();
 
 export default function App() {
+  const username = "Greg";
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <UserContext.Provider value={username}>
+      <Container>
+        <ProductList />
+      </Container>
+    </UserContext.Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function ProductList(props) {
+  return (
+    <Header>
+      <Product username={props.username} />
+    </Header>
+  );
+}
+
+function Product() {
+  return (
+    <UserContext.Consumer>
+      {(value) => <Text>Received, {value}</Text>}
+    </UserContext.Consumer>
+  );
+}
