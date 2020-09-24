@@ -21,11 +21,3 @@ function ProductList(props) {
     </Header>
   );
 }
-
-function Product() {
-  return (
-    <UserContext.Consumer>
-      {(value) => <Text>Received, {value}</Text>}
-    </UserContext.Consumer>
-  );
-}
