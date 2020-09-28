@@ -1,23 +1,29 @@
-import React from "react";
-import { Container, Header, Text } from "native-base";
+import React, { useReducer } from "react";
+import ToDoList from "./ToDoList";
 
-const UserContext = React.createContext();
+const todosInitialState = {
+  todos: [
+    { id: 1, text: "finishing writing hooks chapter" },
+    { id: 2, text: "play with kids" },
+    { id: 3, text: "read bible" },
+  ],
+};
 
-export default function App() {
-  const username = "Greg";
-  return (
-    <UserContext.Provider value={username}>
-      <Container>
-        <ProductList />
-      </Container>
-    </UserContext.Provider>
-  );
+function todosReducer(state, action) {
+  switch (action.type) {
+    default:
+      return todosInitialState;
+  }
 }
 
-function ProductList(props) {
+export const TodosContext = React.createContext();
+
+export default function App() {
+  const [state, dispatch] = useReducer(todosReducer, todosInitialState);
+
   return (
-    <Header>
-      <Product username={props.username} />
-    </Header>
+    <TodosContext.Provider value={{ state, dispatch }}>
+      <TodoList />
+    </TodosContext.Provider>
   );
 }
