@@ -14,12 +14,19 @@ export default function ToDoList() {
     </View>
   );
 
+  const deleteRow = (todo) => {
+    dispatch({ type: "delete", payload: todo });
+  };
+
   const renderHiddenItem = (data, rowMap) => (
     <View style={styles.rowBack}>
       <TouchableOpacity>
         <Text>Edit</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.backRightBtn]}>
+      <TouchableOpacity
+        style={[styles.backRightBtn]}
+        onPress={() => deleteRow(data.item)}
+      >
         <Text style={{ color: "#FFF" }}>Delete</Text>
       </TouchableOpacity>
     </View>
